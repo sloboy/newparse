@@ -14,9 +14,13 @@ var FileContents = '';  // holds the string that will be writen to file
 let rawdata = fs.readFileSync('Page11_12.json');  
 let p_json = JSON.parse(rawdata);
 
-fs.readFile(fields_file, "utf8", function(error, field_defs) {
-  field_defs = d3.csvParse(field_defs);
-}
+// fs.readFile(fields_file, "utf8", function(error, field_defs)) {
+//   field_defs = d3.csvParse(field_defs);
+// };
+fs.readFile(fields_file, function (err, field_defs) {
+  if (err) throw err;
+});
+field_defs = d3.csvParse(field_defs);
 //console.log(JSON.stringify(field_defs));
 var s = firstBy("Page").thenBy("full_field").thenBy(function (v1, v2) { return v2.Multi - v1.Multi; });
 field_defs.sort(s);
